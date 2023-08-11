@@ -1,0 +1,2 @@
+Main-Class: edu.school21.printer.app.Main
+Class-Path: lib/JCDP-2.0.1.jar lib/jcommander-1.83.jar
