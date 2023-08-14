@@ -99,8 +99,7 @@ public class MessagesRepositoryJdbcImpl implements MessagesRepository {
             statement.executeUpdate();
             return message.getId();
         } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+            throw new NotSavedSubEntityException("Message not updated");
         }
     }
 }
