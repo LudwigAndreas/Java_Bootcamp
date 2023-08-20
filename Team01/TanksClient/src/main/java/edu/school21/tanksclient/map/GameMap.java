@@ -129,7 +129,7 @@ public class GameMap {
 				for (int q = y; q <= y + chunkHeight - unitSize; q += unitSize) {
 					Stable e = null;
 					try {
-						e = (Stable) cls.newInstance();
+						e = cls.newInstance();
 					} catch (InstantiationException e1) {
 						e1.printStackTrace();
 					} catch (IllegalAccessException e1) {
