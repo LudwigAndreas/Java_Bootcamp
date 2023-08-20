@@ -17,10 +17,10 @@ public class GameHud {
 	private Text timeHud;
 	private Text livesHud;
 	private Text levelHud;
-	private Game myGame;
+	private Game game;
 	
 	public GameHud(Game game) {
-		myGame = game;
+		this.game = game;
 	}
 	
 	public Node initHud() {
@@ -53,14 +53,14 @@ public class GameHud {
 	}
 	
 	public void updateLivesHud() {
-		livesHud.setText(String.format("Lives: %d", myGame.getLives()));
+		livesHud.setText(String.format("Lives: %d", game.getLives()));
 	}
 	
 	public void updateTimeHud() {
-		timeHud.setText("Time: " + (Game.GAME_TIME_SECONDS - (System.nanoTime() - myGame.getStartTime()) / 1000000000L));
+		timeHud.setText("Time: " + (Game.GAME_TIME_SECONDS - (System.nanoTime() - game.getStartTime()) / 1000000000L));
 	}
 	
 	public void updateLevelHud() {
-		levelHud.setText("Level: " + myGame.getCurrentLevel());
+		levelHud.setText("Level: " + game.getCurrentLevel());
 	}
 }

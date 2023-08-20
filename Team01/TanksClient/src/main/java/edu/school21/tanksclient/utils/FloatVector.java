@@ -4,7 +4,7 @@ public class FloatVector implements Vector2<Float> {
     Float X;
     Float Y;
 
-    FloatVector(Float X, Float Y) {
+    public FloatVector(Float X, Float Y) {
         setX(X);
         setY(Y);
     }

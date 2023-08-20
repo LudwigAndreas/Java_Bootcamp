@@ -18,7 +18,7 @@ public class OverScene extends GameScene {
 	}
 	
 	public Scene initScene() {
-    	Label indicator = new Label("Game Over\nScore: " + myGame.getScore());
+    	Label indicator = new Label("Game Over\nScore: " + game.getScore());
     	indicator.setFont(new Font(20));
     	Button startButton = uiManager.initStartButton();
     	startButton.setText("Play Again");
@@ -28,7 +28,7 @@ public class OverScene extends GameScene {
     	root.setSpacing(60);
     	root.setAlignment(Pos.CENTER);
     	root.getChildren().add(indicator);
-    	int score = myGame.getScore();
+    	int score = game.getScore();
     	if (uiManager.getBoard().canGetOn(score)) {
     		root.getChildren().add(uiManager.initNameInput(score));
     	}

@@ -22,7 +22,7 @@ public class WinScene extends GameScene {
     	root.setSpacing(60);
     	root.setAlignment(Pos.CENTER);
     	
-    	int score = myGame.getScore();
+    	int score = game.getScore();
     	Label indicator = new Label("You Won!\nScore: " + score);
     	root.getChildren().add(indicator);
     	if (uiManager.getBoard().canGetOn(score)) {

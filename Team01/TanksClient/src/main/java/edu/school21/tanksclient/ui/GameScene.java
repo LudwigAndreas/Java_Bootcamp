@@ -1,6 +1,7 @@
 package edu.school21.tanksclient.ui;
 import edu.school21.tanksclient.game.Game;
 import javafx.scene.Scene;
+// import javafx.scene.Scene;
 
 /**
  * @author billyu
@@ -9,7 +10,7 @@ import javafx.scene.Scene;
 public abstract class GameScene {
 	protected GameUI uiManager;
 	protected final int SIZE;
-	protected Game myGame;
+	protected Game game;
 	
 	public GameScene(GameUI manager, int SIZE) {
 		uiManager = manager;
@@ -18,7 +19,7 @@ public abstract class GameScene {
 	
 	public GameScene(GameUI manager, int SIZE, Game game) {
 		this(manager, SIZE);
-		myGame = game;
+		this.game = game;
 	}
 	
 	/**

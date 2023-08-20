@@ -62,7 +62,7 @@ public class Game {
 	private static final long GAME_TIME = GAME_TIME_SECONDS * 1000000000L;
 	private long startTime = System.nanoTime();
 
-	private ArrayList<GameObject> elements = new ArrayList<>();
+	private List<GameObject> elements;
 
 	/**
 	 * Returns name of the game.
@@ -162,23 +162,6 @@ public class Game {
 	}
 
 	/**
-	 * present the map of the next level
-	 * if there is no next, game won
-	 */
-	private void nextLevel() {
-		if (currentLevel >= numLevels) {
-			status = Status.Win;
-			return;
-		}
-		elements.removeAll(elements);
-		startTime = System.nanoTime();
-		map.buildMap(currentLevel);
-//		playerTank = map.getPlayerTank();
-		status = Status.Play;
-		currentLevel++;
-	}
-
-	/**
 	 * @param code key pressed on keyboard
 	 * controls and cheats
 	 */
@@ -188,23 +171,23 @@ public class Game {
 		}
 		switch (code) {
 		case SPACE:
-//			playerTank.fireMissile();
-			break;
-		case RIGHT:
-		case D:
-//			playerTank.setDirection(Direction.RIGHT);
-			break;
-		case LEFT:
-		case A:
-//			playerTank.setDirection(Direction.LEFT);
+			playerTank.fireMissile();
 			break;
 		case UP:
 		case W:
-//			playerTank.setDirection(Direction.UP);
+			playerTank.move(PlayerTank.Direction.UP);
 			break;
 		case DOWN:
 		case S:
-//			playerTank.setDirection(Direction.DOWN);
+			playerTank.move(PlayerTank.Direction.DOWN);
+			break;
+		case LEFT:
+		case A:
+			playerTank.move(PlayerTank.Direction.LEFT);
+			break;
+		case RIGHT:
+		case D:
+			playerTank.move(PlayerTank.Direction.RIGHT);
 			break;
 		default:
 			break;
@@ -278,33 +261,27 @@ public class Game {
 	}
 
 	private void updateElements(double elapsedTime) {
-		// gc.clearRect(0, 0, width, height);
-		// int i = 0;
-		// while (i < elements.size()) {
-		// 	Sprite e = elements.get(i);
-		// 	if (e.isAlive()) {
-		// 		e.update(elapsedTime);
-		// 		i++;
-		// 	}
-		// 	else {
-		// 		if (e instanceof Home) {
-		// 			if (status == Status.Play) {
-		// 				setToLose();
-		// 			}
-		// 			i++;
-		// 			continue;
-		// 		}
-		// 		elements.remove(i);
-		// 		if (e.getBITMASK() == playerTank.getBITMASK()) {
-		// 			playerTank = map.revivePlayerTank();
-		// 			lives--;
-		// 			deadTime = System.nanoTime();
-		// 		}
-		// 		else if (e.getBITMASK() == Game.ENEMY_TANK_MASK) {
-		// 			score += SCORE_UNIT;
-		// 		}
-		// 	}
-		// }
+		gc.clearRect(0, 0, width, height);
+		int i = 0;
+		while (i < elements.size()) {
+			GameObject e = elements.get(i);
+			// if (e.isAlive()) {
+			// 	e.update(elapsedTime);
+			// 	i++;
+			// }
+			
+			if (e instanceof Home) {
+				if (status == Status.Play) {
+					setToLose();
+				}
+				i++;
+				continue;
+			}
+			elements.remove(i);
+			if (e.getBITMASK() == Game.ENEMY_TANK_MASK) {
+				score += SCORE_UNIT;
+			}
+		}
 	}
 
 	private void showScore() {

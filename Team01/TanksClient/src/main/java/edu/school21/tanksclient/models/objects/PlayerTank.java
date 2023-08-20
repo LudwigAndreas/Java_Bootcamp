@@ -6,7 +6,9 @@ import javafx.scene.image.Image;
 
 public class PlayerTank extends Tank {
 
-	enum Direction {
+	private Float rotate_speed = 1f;
+
+	public enum Direction {
 		UP,
 		DOWN,
 		LEFT,
@@ -21,7 +23,41 @@ public class PlayerTank extends Tank {
 		super(attrs);
 	}
 
-	public void move(Direction dir) {
+	public void rotate(Float angle) {
+		setAngle((getAngle() + angle + 360) % 360);
+		FloatVector mov = new FloatVector(
+			new Float(Math.cos(getAngle())), 
+			new Float(Math.sin(getAngle()))
+		);
+		setMovement(mov);
+	}
 
+	public void move(Direction dir) {
+		switch (dir) {
+			case UP:
+				FloatVector pos = new FloatVector(
+					getPosition().getX() + getMovement().getX(), 
+					getPosition().getY() + getMovement().getY()
+				);
+				setPosition(pos);
+				break;
+			case DOWN:
+				FloatVector pos = new FloatVector(
+					getPosition().getX() - getMovement().getX(), 
+					getPosition().getY() - getMovement().getY()
+				);
+				setPosition(pos);
+				break;
+			case LEFT:
+				rotate(rotate_speed);
+				break;
+			case RIGHT:
+				rotate(-rotate_speed);
+				break;
+		}
+	}
+
+	public void fireMissile() {
+		
 	}
 }
